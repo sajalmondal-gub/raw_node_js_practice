@@ -1,3 +1,4 @@
+const { error } = require("console");
 const http = require("http");
 const { json } = require("stream/consumers");
 const { URL } = require("url");
@@ -95,6 +96,25 @@ const server = http.createServer((req, res) => {
     let body = "";
     req.on("data", (chunk) => {
       body += chunk.toString();
+    });
+    req.on("end", () => {
+      try {
+        const updateTodo = JSON.parse(body);
+        if (todos.findIndex((t) => t.id === id) === -1) {
+          res.writeHead(404, { "content-type": "application/json" });
+          res.end(JSON.stringify({ error: "index not found" }));
+        } else {
+          todos[todos.findIndex((t) => t.id === id)] = {
+            ...todos[todos.findIndex((t) => t.id === id)],
+            ...updateTodo,
+          };
+          res.writeHead(200, { "content-type": "application/json" });
+          res.end(JSON.stringify(todos[todos.findIndex((t) => t.id === id)]));
+        }
+      } catch (error) {
+        res.writeHead(401, { "content-type": "application/json" });
+        res.end(JSON.stringify({ error: "Invalid JSON" }));
+      }
     });
   }
 });
