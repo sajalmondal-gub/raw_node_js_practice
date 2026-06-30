@@ -1,5 +1,6 @@
 const http=require('http');
-const url=require('url');
+const {URL}=require('url');
+const querystring=require('querystring');
 
 const server=http.createServer((req,res)=>{
     //  console.log('Request Headers:', req.headers);
@@ -11,17 +12,31 @@ const server=http.createServer((req,res)=>{
     //   console.log('Request url:',url);
     //   console.log('Request method:',method);
 
-    console.log('url',url);
-    const parsedUrl=url.parse(req.url,true);
-    // console.log('paresedUrl',parsedUrl);
-     res.writeHead(200, { 'Content-Type': 'application/json' });
-     res.end(JSON.stringify({
-        pathname: parsedUrl.pathname,
-        query: parsedUrl.query,
-        href: parsedUrl.href,
-        
-     }))
+    // console.log('url',url);
+    // const parsedUrl=url.parse(req.url,true);
+    // // console.log('paresedUrl',parsedUrl);
+    //  res.writeHead(200, { 'Content-Type': 'application/json' });
+    //  res.end(JSON.stringify({
+    //     pathname: parsedUrl.pathname,
+    //     query: parsedUrl.query,
+    //     href: parsedUrl.href,
 
+    //  }))
+
+    console.log (URL);
+    const basedUrl='http://'+req.headers.host + '/';
+    console.log('basedUrl',basedUrl);
+    const myUrl=new URL(req.url,basedUrl);
+    console.log('myUrl',myUrl);
+
+    const queryObject={
+        'name':'John',
+        'age':30,
+        'city':'New York'
+    }
+
+    const queryStr= querystring.stringify(queryObject);
+    console.log('Query String:', queryStr);
 })
 
 const PORT=3000;
