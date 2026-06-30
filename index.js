@@ -116,6 +116,22 @@ const server = http.createServer((req, res) => {
         res.end(JSON.stringify({ error: "Invalid JSON" }));
       }
     });
+  } else if (method === "DELETE" && pathname.startsWith("/todos/")) {
+    
+    const id = parseInt(pathname.split("/")[2]);
+
+    const index = todos.findIndex(t => t.id === id);
+    if (index === -1) {
+      res.writeHead(400, { "content-type": "application/json" });
+      res.end(JSON.stringify({ error: "Index not found" }));
+    } else {
+      todos=todos.filter(t => t.id !== id);
+      res.writeHead(204);
+      res.end();
+    }
+  } else {
+    res.writeHead(404, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ error: "Not Found" }));
   }
 });
 
