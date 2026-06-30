@@ -5,6 +5,10 @@ const server=http.createServer((req,res)=>{
      console.log(req.headers['user-agent']);
       const acceptLanguage = req.headers['accept-language'];
       console.log('Accept Language:', acceptLanguage);
+      const {url,method}=req;
+
+      console.log('Request url:',url);
+      console.log('Request method:',method);
 })
 
 const PORT=3000;
