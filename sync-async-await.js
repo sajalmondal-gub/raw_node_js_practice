@@ -7,8 +7,11 @@ const fs=require('fs');
 
 //async file read
 
-fs.readFile('data.txt',"utf-8",(err,data)=>{
-    //  console.log(err);
-    console.log(data);
-});
-console.log('this is after async readfile log');
+// fs.readFile('data.txt',"utf-8",(err,data)=>{
+//     //  console.log(err);
+//     console.log(data);
+// });
+// console.log('this is after async readfile log');
+
+
+
