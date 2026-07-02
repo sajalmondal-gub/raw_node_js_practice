@@ -36,14 +36,32 @@ const fs = require("fs");
 
 // myPromise.then(result=>console.log('this is result',result)).catch(error=>console.log(error.message));
 
-const myPromise = new Promise((resolve, reject) => {
-  const success = Math.random() > 5;
-  if (success) {
-    resolve("Operation completed successfully");
-  } else {
-    reject(new Error("Operation failed"));
-  }
-});
+// const myPromise = new Promise((resolve, reject) => {
+//   const success = Math.random() > 5;
+//   if (success) {
+//     resolve("Operation completed successfully");
+//   } else {
+//     reject(new Error("Operation failed"));
+//   }
+// });
 
+// myPromise.then((result)=>result).catch((error)=>error);
 
-myPromise.then((result)=>result).catch((error)=>error);
+// Basic Async/Await
+
+async function getStart() {
+  console.log("starting...");
+  const result = await Myresult();
+  console.log(`Result: ${result}`);
+  return result;
+}
+
+function Myresult() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("this is my result");
+    }, 1000);
+  });
+}
+
+getStart().then(data => console.log('Final data:', data));
