@@ -23,15 +23,24 @@ const fs = require("fs");
 
 // node promise
 
-const myPromise = new Promise((resolve, reject) => {
-    setTimeout(()=>{
-        const success=Math.random >2;
-        if (success) {
-           resolve('Operation completed successfully');
-        }else{
-            reject(new Error('Operation failed'))
-        }
-    },1000);
-});
+// const myPromise = new Promise((resolve, reject) => {
+//     setTimeout(()=>{
+//         const success=Math.random >2;
+//         if (success) {
+//            resolve('Operation completed successfully');
+//         }else{
+//             reject(new Error('Operation failed'))
+//         }
+//     },1000);
+// });
 
-myPromise.then(result=>console.log('this is result',result)).catch(error=>console.log(error.message));
+// myPromise.then(result=>console.log('this is result',result)).catch(error=>console.log(error.message));
+
+const myPromise = new Promise((resolve, reject) => {
+  const success = Math.random() > 5;
+  if (success) {
+    resolve("Operation completed successfully");
+  } else {
+    reject(new Error("Operation failed"));
+  }
+});
