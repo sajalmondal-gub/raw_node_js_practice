@@ -44,3 +44,6 @@ const myPromise = new Promise((resolve, reject) => {
     reject(new Error("Operation failed"));
   }
 });
+
+
+myPromise.then((result)=>result).catch((error)=>error);
