@@ -49,19 +49,31 @@ const fs = require("fs");
 
 // Basic Async/Await
 
-async function getStart() {
-  console.log("starting...");
-  const result = await Myresult();
-  console.log(`Result: ${result}`);
+// async function getStart() {
+//   console.log("starting...");
+//   const result = await Myresult();
+//   console.log(`Result: ${result}`);
+//   return result;
+// }
+
+// function Myresult() {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve("this is my result");
+//     }, 1000);
+//   });
+// }
+
+// getStart().then(data => console.log('Final data:', data));
+
+async function MyFunction() {
+  console.log("this is start");
+  const result = await testFuncion();
   return result;
 }
 
-function Myresult() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve("this is my result");
-    }, 1000);
-  });
+function testFuncion() {
+  return new Promise((resolve) => resolve("this is await"), 500000);
 }
 
-getStart().then(data => console.log('Final data:', data));
+MyFunction().then((result) => console.log("this is data", result));
