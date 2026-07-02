@@ -14,4 +14,11 @@ const fs=require('fs');
 // console.log('this is after async readfile log');
 
 
+//sync 
 
+// const myData=fs.readFileSync('data.txt','utf8');
+// console.log(myData);
+
+// fs.readFile('data.txt','utf8',(err,data)=>{
+//     console.log(data);
+// });
