@@ -66,14 +66,25 @@ const fs = require("fs");
 
 // getStart().then(data => console.log('Final data:', data));
 
-async function MyFunction() {
-  console.log("this is start");
-  const result = await testFuncion();
-  return result;
-}
+// async function MyFunction() {
+//   console.log("this is start");
+//   const result = await testFuncion();
+//   return result;
+// }
 
-function testFuncion() {
-  return new Promise((resolve) => resolve("this is await"), 500000);
-}
+// function testFuncion() {
+//   return new Promise((resolve) => resolve("this is await"), 500000);
+// }
 
-MyFunction().then((result) => console.log("this is data", result));
+// MyFunction().then((result) => console.log("this is data", result));
+// // Reading a File with Async/Await
+
+// async function myFunction() {
+//   console.log("this is start");
+//   const result = await Myresult();
+//   return result;
+// }
+
+// function Myresult() {
+    
+// }
