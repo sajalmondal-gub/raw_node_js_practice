@@ -1,0 +1,19 @@
+# SSL Certificates (Gopon chabi - shobcheye guruttopurno!)
+key.pem
+cert.pem
+
+# Node dependencies (Eta size-e onek boro hoy)
+node_modules/
+
+# Environment Variables (Jekhane database password ba API key thake)
+.env
+
+# Log files (Error ba debug er tothyo)
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# OS generated files (Windows/Mac er default hidden file)
+Thumbs.db
+.DS_Store
