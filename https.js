@@ -13,28 +13,38 @@ const sslOptions = {
   key: readFileSync(path.join(import.meta.dirname, "key.pem")),
   cert: readFileSync(path.join(import.meta.dirname, "cert.pem")),
   minVersion: "TLSv1.2",
-  
 };
 
 console.log(sslOptions);
-const server=https.createServer(sslOptions,(req,res)=>{
-    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-    res.setHeader('X-Content-Type-Options', 'nosniff');
-    res.setHeader('X-Frame-Options','SAMEORIGIN');
-    res.setHeader('X-XSS-Protection','1;mode=block');
-    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-    if (req.method=== "GET" && req.url ==='/' ) {
-        res.writeHead(200,'Content-type','Text/html;charsheet')
-        res.end(`<h1>Welcome to the Secure Server</h1><p>Your connection is encrypted!</p>`);
-    }
+const server = https.createServer(sslOptions, (req, res) => {
+  res.setHeader(
+    "Strict-Transport-Security",
+    "max-age=31536000; includeSubDomains",
+  );
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "SAMEORIGIN");
+  res.setHeader("X-XSS-Protection", "1;mode=block");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  if (req.method === "GET" && req.url === "/") {
+    res.writeHead(200, { "Content-type": "Text/html;charsheet" });
+    res.end(
+      `<h1>Welcome to the Secure Server</h1><p>Your connection is encrypted!</p>`,
+    );
+  } else if (req.method === "GET" && req.url === "/api/status") {
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify({ status: "OK", time: new Date().toISOString() }));
+  } else {
+    res.writeHead(404, { "Content-Type": "text/plain" });
+    res.end("404 Not Found");
+  }
 });
 
-server.on('error',(error)=>{
-    console.log('Server error:', error.message);
+server.on("error", (error) => {
+  console.log("Server error:", error.message);
 });
 
-const port =3000;
+const port = 3000;
 
-server.listen(port,()=>{
-    console.log(`server run on the https://localehost:${port}`);
+server.listen(port, () => {
+  console.log(`server run on the https://localehost:${port}`);
 });
