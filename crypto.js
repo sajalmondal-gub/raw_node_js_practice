@@ -14,9 +14,15 @@ function encrypt(text, key) {
   let encryptData = cipher.update("text", "utf8", "hex");
   encryptData += cipher.final("hex");
   console.log(encryptData);
-  console.log('this is an inv',inv.toString('hex'));
+  console.log("this is an inv", inv.toString("hex"));
+  return {
+    inv: inv.toString("hex"),
+    encryptedData: encryptData,
+  };
 }
 
 // Note: In a real application, use a properly generated and securely stored key
 const key = crypto.scryptSync("secretPassword", "salt", 32);
-const result = encrypt("hi", key);
+const {inv ,encryptedData} = encrypt("hi", key);
+console.log('this is inv',inv);
+console.log('this is encryptedata',encryptedData);
