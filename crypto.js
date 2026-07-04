@@ -11,7 +11,7 @@ function encrypt(text, key) {
   //   console.log('this is cipher',cipher);
 
   // Encrypt the data
-  let encryptData = cipher.update("text", "utf8", "hex");
+  let encryptData = cipher.update(text, "utf8", "hex");
   encryptData += cipher.final("hex");
   console.log(encryptData);
   console.log("this is an inv", inv.toString("hex"));
@@ -21,8 +21,24 @@ function encrypt(text, key) {
   };
 }
 
+// decrypts the data
+function decrypt(encryptedData, key, inv) {
+  const decipher = crypto.createDecipheriv(
+    "aes-256-cbc",
+    key,
+    Buffer.from(inv, "hex"),
+  );
+  let dycrptedData = decipher.update(encryptedData, "hex", "utf8");
+  dycrptedData += decipher.final("utf8");
+  return dycrptedData;
+}
+
 // Note: In a real application, use a properly generated and securely stored key
 const key = crypto.scryptSync("secretPassword", "salt", 32);
-const {inv ,encryptedData} = encrypt("hi", key);
-console.log('this is inv',inv);
-console.log('this is encryptedata',encryptedData);
+const message="This is a secret message"
+const { inv, encryptedData } = encrypt(message, key);
+console.log("this is inv", inv);
+console.log("this is encryptedata", encryptedData);
+
+const dycriptedData = decrypt(encryptedData, key, inv);
+console.log("this is decrypted data", dycriptedData);
